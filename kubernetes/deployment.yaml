@@ -1,41 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-go-application
+  name: demo-k8s-application
   namespace: default
   labels:
-    app: demo-go-application
+    app: demo-k8s-application
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: demo-go-application
+      app: demo-k8s-application
   template:
     metadata:
       labels:
-        app: demo-go-application
+        app: demo-k8s-application
     spec:
       containers:
-        - name: demo-go-application
-          image: technovacdemo.azurecr.io/demo-go-application:v1
+        - name: demo-k8s-application
+          image: docker/getting-started
           ports:
-            - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 15
-            periodSeconds: 10
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "256Mi"
-            requests:
-              cpu: "200m"
-              memory: "128Mi"
+            - containerPort: 80
